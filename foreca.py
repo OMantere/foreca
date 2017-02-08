@@ -13,7 +13,11 @@ base_url = 'http://www.foreca.fi'
 
 
 def search(term):
-	return requests.get(base_url + search_url + term).json()[0]
+        response = requests.get(base_url + search_url + term).json()
+        if len(response) is 0:
+            print('No results with search term.')
+            exit()
+	return response[0]
 
 
 def get_location(search_result):
